@@ -1,0 +1,12 @@
+import React, { Component } from 'react';
+import { Button, View ,TextInput, Text} from "react-native";
+
+export default class Next extends React.Component {
+
+ render(){
+   return(
+     <Text onPress={this.props.onPress}>Let's Go </Text>
+   )
+ }
+
+}

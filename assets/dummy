@@ -1,0 +1,51 @@
+import React from 'react';
+
+import { StyleSheet, Text, View } from 'react-native';
+import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import { createAppContainer } from 'react-navigation';
+import displayday from './displayday';
+import planner from './planner';
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
+import DateTimePickerTester from './flow/pick_calendar';
+import DigitalClock from './digitalclock';
+class HomeScreen extends React.Component {
+  constructor(props) {
+  super(props);
+  this.state = {};
+  this.onDayPress = this.onDayPress.bind(this);
+}
+onDayPress(day) {
+  console.log(day);
+  this.setState({
+    selected: day.dateString
+  });
+}
+  render() {
+    return (
+      <Calendar
+      onDayPress={
+        this.onDayPress
+    }
+
+      markedDates={{[this.state.selected]: {selected: true, disableTouchEvent: true, selectedDotColor: 'black'}}}
+      theme={{
+          'stylesheet.day.basic':{
+            'base':{
+              width:40,
+              height:100
+            }
+          }
+      }} />
+    );
+  }
+}
+
+const TabNavigator = createMaterialTopTabNavigator({
+  Home: HomeScreen,
+  Settings: displayday,
+  Planner:planner,
+  Pick: DateTimePickerTester,
+  Clock: DigitalClock
+});
+
+export default createAppContainer(TabNavigator);
